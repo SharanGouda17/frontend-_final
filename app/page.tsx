@@ -1,65 +1,176 @@
-import Image from "next/image";
+export default function Dashboard() {
+  const cards = [
+    { title: "Total Assets", value: 8 },
+    { title: "Assigned", value: 5 },
+    { title: "Available", value: 2 },
+    { title: "In Maintenance", value: 1 },
+  ];
 
-export default function Home() {
+  const activities = [
+    {
+      id: "A001",
+      name: 'MacBook Pro 16"',
+      desc: "Laptop • MP16X-7842",
+      status: "Assigned",
+      user: "Sarah Chen",
+    },
+    {
+      id: "A002",
+      name: "Dell UltraSharp 27\"",
+      desc: "Monitor • DEL-U2723QE",
+      status: "Available",
+      user: "",
+    },
+    {
+      id: "A003",
+      name: "iPhone 15 Pro",
+      desc: "Mobile • AP-15P-3921",
+      status: "Assigned",
+      user: "Michael Torres",
+    },
+    {
+      id: "A004",
+      name: "Ergonomic Office Chair",
+      desc: "Furniture • FURN-EC-112",
+      status: "Assigned",
+      user: "Emma Rodriguez",
+    },
+    {
+      id: "A005",
+      name: "Lenovo ThinkPad X1",
+      desc: "Laptop • LN-TPX1-667",
+      status: "Maintenance",
+      user: "",
+    },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+
+      {/* Heading */}
+      <h1 className="text-3xl font-semibold mb-2">
+        Welcome back, Alex
+      </h1>
+      <p className="text-gray-400 mb-6">
+        Here's what's happening with your company's assets today.
+      </p>
+
+      {/* Cards */}
+      <div className="grid grid-cols-4 gap-6 mb-6">
+
+        {cards.map((c, i) => (
+          <div
+            key={i}
+            className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <p className="text-gray-400 text-sm">{c.title}</p>
+            <h2 className="text-3xl mt-2">{c.value}</h2>
+
+            <p className="text-green-400 text-sm mt-2">
+              +1 from last month
+            </p>
+          </div>
+        ))}
+
+      </div>
+
+      {/* Bottom Section */}
+      <div className="grid grid-cols-2 gap-6">
+
+        {/* Asset Distribution */}
+        <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+          <h3 className="text-lg mb-4">Asset Distribution</h3>
+
+          {[
+            { name: "Laptop", value: 2 },
+            { name: "Monitor", value: 2 },
+            { name: "Mobile", value: 1 },
+            { name: "Furniture", value: 1 },
+          ].map((item) => (
+            <div key={item.name} className="mb-4">
+
+              <div className="flex justify-between text-sm text-gray-400">
+                <span>{item.name}</span>
+                <span>{item.value}</span>
+              </div>
+
+              <div className="w-full h-2 bg-zinc-800 rounded mt-1">
+                <div
+                  className="h-2 bg-blue-500 rounded"
+                  style={{ width: `${item.value * 30}%` }}
+                />
+              </div>
+
+            </div>
+          ))}
         </div>
-      </main>
+
+        {/* ✅ RECENT ACTIVITY (UPDATED LIKE IMAGE) */}
+        <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+
+          {/* Header */}
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-lg font-semibold">Recent Activity</h2>
+            <span className="text-blue-400 text-sm cursor-pointer">
+              View all →
+            </span>
+          </div>
+
+          {/* List */}
+          <div className="space-y-4">
+
+            {activities.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between border-b border-zinc-800 pb-4 hover:bg-zinc-800/40 p-2 rounded-lg transition"
+              >
+
+                {/* Left */}
+                <div className="flex items-center gap-4">
+
+                  <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-sm">
+                    {item.id}
+                  </div>
+
+                  <div>
+                    <p className="font-medium">{item.name}</p>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </div>
+
+                </div>
+
+                {/* Right */}
+                <div className="flex items-center gap-4">
+
+                  <span
+                    className={`px-4 py-1 text-xs rounded-full ${
+                      item.status === "Assigned"
+                        ? "bg-blue-600/20 text-blue-400"
+                        : item.status === "Available"
+                        ? "bg-green-600/20 text-green-400"
+                        : "bg-orange-600/20 text-orange-400"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+
+                  {item.user && (
+                    <span className="text-sm text-gray-400">
+                      {item.user}
+                    </span>
+                  )}
+
+                </div>
+
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
