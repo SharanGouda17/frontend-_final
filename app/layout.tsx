@@ -17,10 +17,9 @@ export default function RootLayout({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token"); // ✅ FIXED: was "user"
 
-    // ✅ Redirect only if NOT on login page
-    if (!user && pathname !== "/login") {
+    if (!token && pathname !== "/login") {
       router.push("/login");
     }
 
@@ -31,7 +30,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#0b0f19] text-white">
 
-        {/* ⏳ Wait for auth check */}
         {loading ? null : pathname === "/login" ? (
           children
         ) : (

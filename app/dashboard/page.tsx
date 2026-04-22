@@ -116,7 +116,7 @@ export default function Dashboard() {
 
       </div>
 
-      {/* 🔥 RECENT ACTIVITY (UNCHANGED) */}
+      {/* 🔥 RECENT ACTIVITY */}
       <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-500">
         <div className="flex justify-between mb-4">
           <h2 className="text-lg font-semibold">Recent Activity</h2>
@@ -127,7 +127,7 @@ export default function Dashboard() {
 
         <div className="space-y-4">
           {[
-            { id: "A001", name: "MacBook Pro 16”", status: "Assigned", color: "bg-blue-600" },
+            { id: "A001", name: "MacBook Pro 16\"", status: "Assigned", color: "bg-blue-600" },
             { id: "A002", name: "Dell Monitor", status: "Available", color: "bg-green-600" },
             { id: "A003", name: "iPhone 15 Pro", status: "Assigned", color: "bg-blue-600" },
             { id: "A004", name: "Office Chair", status: "Maintenance", color: "bg-yellow-600" },
@@ -139,7 +139,6 @@ export default function Dashboard() {
                 </div>
                 <p>{item.name}</p>
               </div>
-
               <span className={`${item.color} px-3 py-1 rounded-full text-sm`}>
                 {item.status}
               </span>
@@ -155,7 +154,11 @@ export default function Dashboard() {
           <input placeholder="Asset Name" className="input" />
           <input placeholder="Category" className="input" />
           <input placeholder="Serial Number" className="input" />
-          <button className="btn-blue">Save</button>
+          {/* ✅ Save & Cancel in same row */}
+          <div className="flex gap-3">
+            <button className="flex-1 bg-blue-600 hover:bg-blue-700 transition p-2 rounded">Save</button>
+            <button onClick={() => setModal("")} className="flex-1 bg-zinc-700 hover:bg-zinc-600 transition p-2 rounded">Cancel</button>
+          </div>
         </Modal>
       )}
 
@@ -163,7 +166,11 @@ export default function Dashboard() {
         <Modal title="Assign Asset" close={() => setModal("")}>
           <input placeholder="Asset ID" className="input" />
           <input placeholder="Assign to User" className="input" />
-          <button className="btn-blue">Assign</button>
+          {/* ✅ Assign & Cancel in same row */}
+          <div className="flex gap-3">
+            <button className="flex-1 bg-indigo-600 hover:bg-indigo-700 transition p-2 rounded">Assign</button>
+            <button onClick={() => setModal("")} className="flex-1 bg-zinc-700 hover:bg-zinc-600 transition p-2 rounded">Cancel</button>
+          </div>
         </Modal>
       )}
 
@@ -176,7 +183,11 @@ export default function Dashboard() {
             <option>Damage</option>
           </select>
           <textarea placeholder="Describe issue..." className="input" />
-          <button className="btn-red">Submit</button>
+          {/* ✅ Submit & Cancel in same row */}
+          <div className="flex gap-3">
+            <button className="flex-1 bg-red-600 hover:bg-red-700 transition p-2 rounded">Submit</button>
+            <button onClick={() => setModal("")} className="flex-1 bg-zinc-700 hover:bg-zinc-600 transition p-2 rounded">Cancel</button>
+          </div>
         </Modal>
       )}
 
@@ -184,17 +195,13 @@ export default function Dashboard() {
   );
 }
 
-/* 🔥 REUSABLE MODAL */
+/* 🔥 REUSABLE MODAL - Cancel button removed from here */
 function Modal({ title, children, close }: any) {
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
       <div className="bg-zinc-900 p-6 rounded-2xl w-[400px] border border-zinc-800 space-y-4">
         <h2 className="text-lg font-semibold">{title}</h2>
         {children}
-
-        <button onClick={close} className="w-full bg-zinc-700 p-2 rounded">
-          Cancel
-        </button>
       </div>
     </div>
   );
