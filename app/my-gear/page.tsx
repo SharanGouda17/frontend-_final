@@ -1,8 +1,7 @@
 "use client";
 
 export default function MyAssetsPage() {
-  // 🔁 Change this to test
-  const myAssets = [
+  const myAssets: any[] = [
     // Uncomment to test data view
     // {
     //   name: "MacBook Pro 16\"",
