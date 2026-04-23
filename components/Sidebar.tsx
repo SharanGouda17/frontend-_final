@@ -18,6 +18,16 @@ export default function Sidebar() {
     { name: "Reports", path: "/reports", icon: "📈" },
   ];
 
+  const handleLogout = () => {
+    // ✅ Clear localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    // ✅ Clear cookie
+    document.cookie = "token=; path=/; max-age=0";
+    // ✅ Redirect to login
+    window.location.href = "/login";
+  };
+
   const renderItem = (item: any) => {
     const isActive = pathname === item.path;
 
@@ -54,7 +64,6 @@ export default function Sidebar() {
         {/* CORE MENU */}
         <div className="p-4">
           <p className="text-xs text-gray-500 mb-3">CORE</p>
-
           <div className="space-y-2">
             {coreMenu.map(renderItem)}
           </div>
@@ -63,7 +72,6 @@ export default function Sidebar() {
         {/* RESOURCES */}
         <div className="p-4">
           <p className="text-xs text-gray-500 mb-3">RESOURCES</p>
-
           <div className="space-y-2">
             {resourceMenu.map(renderItem)}
           </div>
@@ -79,7 +87,6 @@ export default function Sidebar() {
           <div className="w-10 h-10 bg-zinc-700 rounded-full flex items-center justify-center">
             A
           </div>
-
           <div>
             <p className="text-sm font-medium">Alex Rivera</p>
             <p className="text-xs text-gray-500">Admin</p>
@@ -88,10 +95,7 @@ export default function Sidebar() {
 
         {/* LOGOUT BUTTON */}
         <button
-          onClick={() => {
-            localStorage.removeItem("user");
-            window.location.href = "/login";
-          }}
+          onClick={handleLogout}
           className="w-full bg-red-600 hover:bg-red-700 transition p-2 rounded-lg text-sm font-medium"
         >
           Logout
